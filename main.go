@@ -51,7 +51,10 @@ func StartMongoDb(cf MongoDbConfiguration) (*mongo.Client, error) {
 	if err != nil {
 		return nil, errors.New("connection couldn't be stabilished, review your infos")
 	}
-
+	err = client.Ping(ctx, nil)
+	if err != nil {
+		return nil, errors.New("connection couldn't be stabilished, timeout")
+	}
 	return client, nil
 
 }
