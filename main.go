@@ -43,7 +43,7 @@ func StartMongoDb(cf MongoDbConfiguration) (*mongo.Client, error) {
 	options.AppName = &appName
 	options.Auth = cf.Auth
 	options.ConnectTimeout = &connectionTimeout
-	options.ApplyURI(cf.Uri)
+	options = options.ApplyURI(cf.Uri)
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(timeout))
 	defer cancel()
